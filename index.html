@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Ollama App</title>
+    <script>
+        async function sendMessage() {
+            let message = document.getElementById("message").value;
+            let response = await fetch("http://localhost:5000/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: message })
+            });
+            let data = await response.json();
+            document.getElementById("response").innerText = data.response || "Error!";
+        }
+    </script>
+</head>
+<body>
+    <h1>My Ollama App</h1>
+    <textarea id="message" rows="4" cols="50"></textarea><br>
+    <button onclick="sendMessage()">Send</button>
+    <h2>Response:</h2>
+    <p id="response"></p>
+</body>
+</html>
